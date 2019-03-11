@@ -20,7 +20,7 @@ public class playerAnimation : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        moveToNextPatrol();
+        //moveToNextPatrol();
     }
     void Start()
     {
@@ -39,7 +39,7 @@ public class playerAnimation : MonoBehaviour
         {
             Animations(agent.velocity);
             shoot();
-            Debug.Log(agent.remainingDistance);
+            Debug.Log(player);
             if (agent.remainingDistance < 0.25f)
             {
                 //Debug.Log("a");

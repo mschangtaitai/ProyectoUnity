@@ -18,10 +18,22 @@ public class enemyBulletScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+<<<<<<< HEAD
         Destroy(other.gameObject);
+=======
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("a");
+            Destroy(gameObject);
+        }
+>>>>>>> fec9edf8b644c9e71fb5b2c8c69670177a201c85
     }
     private void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("a");
+            Destroy(gameObject);
+        }
     }
 }
