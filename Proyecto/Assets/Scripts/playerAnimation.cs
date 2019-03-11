@@ -85,8 +85,10 @@ public class playerAnimation : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null)
         {
             //notShooting = false;
+            animator.Play("shoot", -1);
             bullet = Instantiate(bulletModel, rifle.transform.position, transform.rotation);
             Vector3 directionVector = player.transform.position - agent.transform.position;
+            directionVector.y -= 1f;
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = directionVector * 0.5f;
 
@@ -98,6 +100,7 @@ public class playerAnimation : MonoBehaviour
         if(other.tag == "playerBullet")
         {  
             health -= 50;
+            animator.Play("dieBack", -1);
         }
     }
 }
