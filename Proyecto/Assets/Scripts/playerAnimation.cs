@@ -16,11 +16,14 @@ public class playerAnimation : MonoBehaviour
     private int currentPointIndex = 0;
     private GameObject player, bullet=null, rifle;
     public GameObject bulletModel;
-    
+    private bool shooting = false;
+    private GameObject audioManagerObject;
+    private AudioManager audioManager;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     private void Awake()
     {
-        moveToNextPatrol();
+        //moveToNextPatrol();
     }
     void Start()
     {
@@ -28,6 +31,9 @@ public class playerAnimation : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
         time = Time.deltaTime;
         player = GameObject.FindWithTag("Player");
+        audioManagerObject = GameObject.Find("Main Camera");
+        audioManager = audioManagerObject.GetComponent<AudioManager>();
+        audioSource = GetComponent<AudioSource>();
         //rifle = GameObject.Find("Weapon");
         //agent = GetComponent<NavMeshAgent>();
     }
@@ -37,13 +43,16 @@ public class playerAnimation : MonoBehaviour
     {
         if (alive)
         {
+            if (Vector3.Distance(transform.position, player.transform.position) < 11.0f && !audioSource.isPlaying && (transform.position.y-player.transform.position.y) < 0.3f)
+            {
+                audioSource.PlayOneShot(audioManager.footStepsEnemy, 1f);
+            }
             Animations(agent.velocity);
             shoot();
             if (agent.remainingDistance < 0.25f)
             {
                 moveToNextPatrol();
-
-
+               
 
             }
 
@@ -79,9 +88,9 @@ public class playerAnimation : MonoBehaviour
     }
     void shoot()
     {
-        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null)
+        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null && !audioSource.isPlaying && (transform.position.y - player.transform.position.y) < 0.6f)
         {
-            //notShooting = false;
+            shooting = true;
             //animator.Play("shoot", -1);
             Vector3 holder = transform.position;
             holder.y += 1f;
@@ -91,6 +100,7 @@ public class playerAnimation : MonoBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = directionVector * 0.5f;
             Debug.Log("a");
+            audioSource.PlayOneShot(audioManager.shot, 1f);
 
         }
     }
