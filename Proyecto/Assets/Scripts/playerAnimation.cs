@@ -28,7 +28,7 @@ public class playerAnimation : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
         time = Time.deltaTime;
         player = GameObject.FindWithTag("Player");
-        rifle = GameObject.Find("Weapon");
+        //rifle = GameObject.Find("Weapon");
         //agent = GetComponent<NavMeshAgent>();
     }
 
@@ -85,7 +85,10 @@ public class playerAnimation : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null)
         {
             //notShooting = false;
-            bullet = Instantiate(bulletModel, rifle.transform.position, transform.rotation);
+            animator.Play("shoot", -1);
+            Vector3 holder = transform.position;
+            holder.y += 1f;
+            bullet = Instantiate(bulletModel, holder, transform.rotation);
             Vector3 directionVector = player.transform.position - agent.transform.position;
             directionVector.y -= 1f;
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
@@ -99,6 +102,7 @@ public class playerAnimation : MonoBehaviour
         if(other.tag == "playerBullet")
         {  
             health -= 50;
+            animator.Play("dieBack", -1);
         }
     }
 }
