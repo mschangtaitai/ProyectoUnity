@@ -18,8 +18,14 @@ public class enemyBulletScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag != "Enemy")
-            Destroy(gameObject);   
+        if (other.gameObject.tag != "Enemy")
+        {
+            Destroy(gameObject);
+            if (other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponent<Player>().life -= 10;
+            }
+        }
     }
 
 }
