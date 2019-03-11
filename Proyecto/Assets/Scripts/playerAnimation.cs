@@ -20,7 +20,7 @@ public class playerAnimation : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        //moveToNextPatrol();
+        moveToNextPatrol();
     }
     void Start()
     {
@@ -39,10 +39,8 @@ public class playerAnimation : MonoBehaviour
         {
             Animations(agent.velocity);
             shoot();
-            Debug.Log(player);
             if (agent.remainingDistance < 0.25f)
             {
-                //Debug.Log("a");
                 moveToNextPatrol();
 
 
@@ -81,11 +79,10 @@ public class playerAnimation : MonoBehaviour
     }
     void shoot()
     {
-        Debug.Log(Vector3.Distance(transform.position, player.transform.position) < 25.0f);
         if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null)
         {
             //notShooting = false;
-            animator.Play("shoot", -1);
+            //animator.Play("shoot", -1);
             Vector3 holder = transform.position;
             holder.y += 1f;
             bullet = Instantiate(bulletModel, holder, transform.rotation);
@@ -93,6 +90,7 @@ public class playerAnimation : MonoBehaviour
             directionVector.y -= 1f;
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             bulletRb.velocity = directionVector * 0.5f;
+            Debug.Log("a");
 
         }
     }
