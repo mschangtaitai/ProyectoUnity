@@ -20,11 +20,16 @@ public class enemyBulletScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            Debug.Log("a");
             Destroy(gameObject);
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("a");
+            Destroy(gameObject);
+        }
     }
 }
