@@ -18,10 +18,7 @@ public class enemyBulletScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            Destroy(gameObject);
-        }
+        Destroy(other.gameObject);
     }
     private void OnCollisionEnter(Collision collision)
     {
