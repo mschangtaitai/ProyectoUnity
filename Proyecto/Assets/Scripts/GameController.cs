@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit) && hit.transform.CompareTag("Enemy")) 
             {
                 Destroy(hit.transform.gameObject);
+                Debug.Log("Hit");
             }
         }
     }
