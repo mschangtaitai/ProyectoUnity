@@ -28,7 +28,7 @@ public class playerAnimation : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
         time = Time.deltaTime;
         player = GameObject.FindWithTag("Player");
-        rifle = GameObject.Find("Weapon");
+        //rifle = GameObject.Find("Weapon");
         //agent = GetComponent<NavMeshAgent>();
     }
 
@@ -86,7 +86,9 @@ public class playerAnimation : MonoBehaviour
         {
             //notShooting = false;
             animator.Play("shoot", -1);
-            bullet = Instantiate(bulletModel, rifle.transform.position, transform.rotation);
+            Vector3 holder = transform.position;
+            holder.y += 1f;
+            bullet = Instantiate(bulletModel, holder, transform.rotation);
             Vector3 directionVector = player.transform.position - agent.transform.position;
             directionVector.y -= 1f;
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
