@@ -28,9 +28,10 @@ private AudioManager audioManager;
         {
 
             if (!audioPlayed)
+            {
                 audioPlayed = true;
                 audio.PlayOneShot(audioManager.diePlayer, 2f);
-                
+            }
 
 
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);

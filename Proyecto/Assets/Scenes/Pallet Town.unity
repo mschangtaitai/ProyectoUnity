@@ -6174,6 +6174,11 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[2]
       value: 
       objectReference: {fileID: 1167496363}
+    - target: {fileID: 1723867021, guid: 167b55fb743a8421d82e451698580394, type: 3}
+      propertyPath: bulletModel
+      value: 
+      objectReference: {fileID: 7633664642204069104, guid: 238f5f7d535dc47dfb827ba4062d17a5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167b55fb743a8421d82e451698580394, type: 3}
 --- !u!1 &701952171 stripped

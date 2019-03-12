@@ -95,11 +95,11 @@ public class playerAnimation : MonoBehaviour
             //animator.Play("shoot", -1);
             Vector3 holder = transform.position;
             holder.y += 1f;
-            bullet = Instantiate(bulletModel, holder, transform.rotation);
+            bullet = Instantiate(bulletModel, holder, transform.rotation * Quaternion.Euler(90f, 45f, 0f));
             Vector3 directionVector = player.transform.position - agent.transform.position;
             directionVector.y -= 1f;
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletRb.velocity = directionVector * 2.5f;
+            bulletRb.velocity = directionVector * 0.5f;//2.5f;
             Debug.Log("a");
             audioSource.PlayOneShot(audioManager.shot, 1f);
 
