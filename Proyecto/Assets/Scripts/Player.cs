@@ -8,10 +8,16 @@ public class Player : MonoBehaviour
 {
     public int life = 100;
     public Text lifeText;
+    private GameObject audioManagerObject;
+private AudioManager audioManager;
+    private AudioSource audio;
+    private bool audioPlayed = false;
 
     void Start()
     {
-        
+        audioManagerObject = GameObject.Find("Main Camera");
+        audioManager = audioManagerObject.GetComponent<AudioManager>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,7 +26,14 @@ public class Player : MonoBehaviour
         lifeText.text = life.ToString(); 
         if (life == 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            if (!audioPlayed)
+                audioPlayed = true;
+                audio.PlayOneShot(audioManager.diePlayer, 2f);
+                
+
+
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

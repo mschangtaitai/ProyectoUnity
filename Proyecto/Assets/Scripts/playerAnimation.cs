@@ -43,7 +43,7 @@ public class playerAnimation : MonoBehaviour
     {
         if (alive)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < 11.0f && !audioSource.isPlaying && (transform.position.y-player.transform.position.y) < 0.3f)
+            if (Vector3.Distance(transform.position, player.transform.position) < 11.5f && !audioSource.isPlaying && (transform.position.y-player.transform.position.y) < 0.3f)
             {
                 audioSource.PlayOneShot(audioManager.footStepsEnemy, 1f);
             }
@@ -88,7 +88,8 @@ public class playerAnimation : MonoBehaviour
     }
     void shoot()
     {
-        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null && !audioSource.isPlaying && (transform.position.y - player.transform.position.y) < 0.6f)
+        Debug.Log(Vector3.Distance(transform.position, player.transform.position) < 25.0f);
+        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null &&  (transform.position.y - player.transform.position.y) < 0.7f)
         {
             shooting = true;
             //animator.Play("shoot", -1);
@@ -98,7 +99,7 @@ public class playerAnimation : MonoBehaviour
             Vector3 directionVector = player.transform.position - agent.transform.position;
             directionVector.y -= 1f;
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletRb.velocity = directionVector * 0.5f;
+            bulletRb.velocity = directionVector * 2.5f;
             Debug.Log("a");
             audioSource.PlayOneShot(audioManager.shot, 1f);
 

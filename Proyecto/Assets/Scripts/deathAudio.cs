@@ -6,18 +6,18 @@ public class deathAudio : MonoBehaviour
 {
     private GameObject audioManagerObject;
     private AudioManager audioManager;
-    private AudioSource audioSource;
+    private AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         audioManagerObject = GameObject.Find("Main Camera");
         audioManager = audioManagerObject.GetComponent<AudioManager>();
-        audioSource = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-
+    { 
+        audio.PlayOneShot(audioManager.diePlayer, 2f);
     }
 }
