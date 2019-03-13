@@ -5,14 +5,14 @@ using UnityEngine;
 public class enemyBulletScript : MonoBehaviour
 {
     private float remainTime;
-    // Start is called before the first frame update
+
     void Start()
     {
         Destroy(gameObject, 155.0f * Time.deltaTime);
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
     }
@@ -23,7 +23,7 @@ public class enemyBulletScript : MonoBehaviour
             Destroy(gameObject);
             if (other.gameObject.tag == "Player")
             {
-                other.gameObject.GetComponent<Player>().life -= 10;
+                other.gameObject.GetComponent<Player>().life -= 20;
             }
         }
     }

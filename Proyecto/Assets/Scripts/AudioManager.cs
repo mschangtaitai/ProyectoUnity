@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioClip shot, background, diePlayer, footStepsEnemy;
-    private AudioSource audio;
-    // Start is called before the first frame update
+    public AudioClip shot, background, diePlayer, footStepsEnemy, playerShot, winSound;
+    private AudioSource audioSource;
+
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

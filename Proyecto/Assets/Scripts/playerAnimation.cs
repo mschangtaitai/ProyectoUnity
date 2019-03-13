@@ -8,42 +8,40 @@ public class playerAnimation : MonoBehaviour
     public Animator animator;
     public Rigidbody rb;
     public int health = 100;
-    private bool alive = true;
+    private bool alive = true, playedDeath = false;
     private float inputH, inputV;
     public float time;
     public NavMeshAgent agent;
     public Transform[] patrolPoints;
     private int currentPointIndex = 0;
-    private GameObject player, bullet=null, rifle;
+    private GameObject player, bullet=null;
     public GameObject bulletModel;
-    private bool shooting = false;
     private GameObject audioManagerObject;
     private AudioManager audioManager;
     private AudioSource audioSource;
-    // Start is called before the first frame update
-    private void Awake()
-    {
-        //moveToNextPatrol();
-    }
+
+
     void Start()
     {
-        //animator = GetComponent<Animator>();
-        //rb = GetComponent<Rigidbody>();
         time = Time.deltaTime;
         player = GameObject.FindWithTag("Player");
         audioManagerObject = GameObject.Find("Main Camera");
         audioManager = audioManagerObject.GetComponent<AudioManager>();
         audioSource = GetComponent<AudioSource>();
-        //rifle = GameObject.Find("Weapon");
-        //agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (health == 0 && playedDeath == false)
+        {
+            animator.Play("dieBack", -1);
+            alive = false;
+            playedDeath = true;
+            agent.SetDestination(agent.transform.position);
+        }
         if (alive)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < 11.5f && !audioSource.isPlaying && (transform.position.y-player.transform.position.y) < 0.3f)
+            if (Vector3.Distance(transform.position, player.transform.position) < 11.0f && !audioSource.isPlaying && (transform.position.y-player.transform.position.y) < 0.3f)
             {
                 audioSource.PlayOneShot(audioManager.footStepsEnemy, 1f);
             }
@@ -71,8 +69,6 @@ public class playerAnimation : MonoBehaviour
             inputV = velocity.y;
             animator.SetFloat("inputH", inputH);
             animator.SetFloat("inputV", inputV);
-
-
     }
 
     void moveToNextPatrol()
@@ -88,19 +84,15 @@ public class playerAnimation : MonoBehaviour
     }
     void shoot()
     {
-        Debug.Log(Vector3.Distance(transform.position, player.transform.position) < 25.0f);
-        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null &&  (transform.position.y - player.transform.position.y) < 0.7f)
+        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null && !audioSource.isPlaying && (transform.position.y - player.transform.position.y) < 0.6f)
         {
-            shooting = true;
-            //animator.Play("shoot", -1);
             Vector3 holder = transform.position;
             holder.y += 1f;
-            bullet = Instantiate(bulletModel, holder, transform.rotation * Quaternion.Euler(90f, 45f, 0f));
+            bullet = Instantiate(bulletModel, holder, transform.rotation);
             Vector3 directionVector = player.transform.position - agent.transform.position;
             directionVector.y -= 1f;
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletRb.velocity = directionVector * 0.5f;//2.5f;
-            Debug.Log("a");
+            bulletRb.velocity = directionVector * 2.5f;
             audioSource.PlayOneShot(audioManager.shot, 1f);
 
         }

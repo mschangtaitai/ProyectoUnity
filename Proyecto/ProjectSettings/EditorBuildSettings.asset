@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 253f71611d0204845824f1b0f191a413
+  - enabled: 1
+    path: Assets/Scenes/Pallet Town.unity
+    guid: 7f6d91b24d49c4686b9cf1947de988a1
+  - enabled: 1
+    path: Assets/Scenes/Platforms.unity
+    guid: 80f47393723a6439fa45074114141d09
+  - enabled: 1
+    path: Assets/Scenes/Parking Tower.unity
+    guid: ebfb399bb5b024ccc84307e4ef9404df
   m_configObjects: {}
