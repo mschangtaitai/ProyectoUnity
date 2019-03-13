@@ -8,7 +8,7 @@ public class playerAnimation : MonoBehaviour
     public Animator animator;
     public Rigidbody rb;
     public int health = 100;
-    private bool alive = true, playedDeath = false;
+    private bool alive = true, playedDeath = false, chasePlayer = false;
     private float inputH, inputV;
     public float time;
     public NavMeshAgent agent;
@@ -47,6 +47,7 @@ public class playerAnimation : MonoBehaviour
             }
             Animations(agent.velocity);
             shoot();
+            moveToPlayer();
             if (agent.remainingDistance < 0.25f)
             {
                 moveToNextPatrol();
@@ -74,7 +75,7 @@ public class playerAnimation : MonoBehaviour
     void moveToNextPatrol()
     {
 
-            if (patrolPoints.Length > 0)
+            if (patrolPoints.Length > 0 && Vector3.Distance(transform.position, player.transform.position) >= 25.0f)
             {
                 agent.SetDestination(patrolPoints[currentPointIndex].position);
                 currentPointIndex++;
@@ -82,9 +83,25 @@ public class playerAnimation : MonoBehaviour
             }
 
     }
+
+    void moveToPlayer()
+    {
+        if (Vector3.Distance(transform.position, player.transform.position) < 25.0f)
+            {
+                agent.SetDestination(player.transform.position);
+            chasePlayer = true;
+            
+            }
+        else if (chasePlayer == true)
+        {
+            chasePlayer = false;
+            agent.SetDestination(patrolPoints[currentPointIndex].position);
+        }
+    }
+
     void shoot()
     {
-        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null && !audioSource.isPlaying && (transform.position.y - player.transform.position.y) < 0.6f)
+        if (Vector3.Distance(transform.position, player.transform.position)< 25.0f && bullet == null && (transform.position.y - player.transform.position.y) < 0.6f)
         {
             Vector3 holder = transform.position;
             holder.y += 1f;

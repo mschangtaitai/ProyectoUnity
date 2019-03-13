@@ -24,12 +24,10 @@ public class GameController : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             audioSource.PlayOneShot(audioManager.playerShot, 2f);
-            if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out RaycastHit hit, 20.0f) && hit.transform.CompareTag("Enemy"))
+            if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out RaycastHit hit, 30.0f) && hit.transform.CompareTag("Enemy"))
             {
                 PlayerAnimation = hit.transform.gameObject.GetComponent<playerAnimation>();
                 PlayerAnimation.health -= 50;
-                //Destroy(hit.transform.gameObject);
-
             }
         }
     }
